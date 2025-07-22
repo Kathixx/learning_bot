@@ -52,6 +52,11 @@ def check_answer():
         return jsonify({'Answer': data, 'Check': "check ok" })
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+@app.route('/getQuestion', methods=['GET'])
+@cross_origin(origin='http://localhost:3000')
+def getQuestion():
+    return jsonify({'Question': 'This is my first question'})
 
 
 if __name__ == "__main__":

@@ -1,11 +1,14 @@
-import { Tester } from "@/components/tester"
+import {PDFViewer} from "@/components/pdf-viewer"
+import {TestContainer} from "@/components/test-container"
 
-export default function TestBot() {
-
+export default async function TestBot() {
 
   return (
-    <div className="w-full h-screen">
-      <Tester></Tester>
+    <div className="w-full h-screen grid grid-cols-2">
+      <div className="w-full justify-center items-center h-screen pt-[100px]">      
+        <PDFViewer></PDFViewer>
+      </div>
+      <TestContainer></TestContainer>
     </div>
   );
 }
