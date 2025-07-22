@@ -85,9 +85,9 @@ export function TestInput({onSend}:TestInputProps) {
       .then((response) => {
         const responseId = uuidv4()
         onSend({id:responseId, text: response.Question, sender:"bot"})
-      });
-    await delay(Math.random() * (2000 - 5000) + 5000)
-    onSend(returnJsonMsg('call_to_action'))
+        // await delay(Math.random() * (2000 - 5000) + 5000)
+        onSend(returnJsonMsg('call_to_action'))
+      })
   }
 
   function returnJsonMsg (

@@ -128,7 +128,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# FAISS databank
+vector_databases/
 
+# backend things
+backend/documents
+backend/.DS_Store
 
 
 

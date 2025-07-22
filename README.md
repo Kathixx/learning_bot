@@ -34,6 +34,22 @@ flask --app app run
 python app.py
 ```
 
+### 1.3. Install packages
+
+```bash
+pip install PyPDF2
+pip install langchain
+pip install langchain-openai
+pip install langchain-anthropic
+pip install langchain-core
+pip install langchain-community
+pip install faiss-cpu
+pip install -U pip setuptools wheel
+pip install -U spacy
+python -m spacy download en_core_web_sm
+pip install -U langchain-community pypdf
+```
+
 
 ## 2. Frontend
 
