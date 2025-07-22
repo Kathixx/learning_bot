@@ -1,0 +1,48 @@
+{
+  "Home": {
+    "greeting": "Welcome!",
+    "greeting-msg": "This is my version of the fabulous Learnboost App!"
+  },
+  "Cards": {
+    "greeting": "Stay tuned!",
+    "greeting-msg": "You'll soon be able to create magic cards here! "
+  },
+  "Summary": {
+    "greeting": "Stay tuned!",
+    "greeting-msg": "This could be the space for a wonderful summary!"
+  },
+  "ModusSelector": {
+    "tutor": "Tutor AI",
+    "cards": "Cards",
+    "summary": "Summary",
+    "testing": "Test Bot",
+    "chatting": "Learn Bot"
+  },
+  "Login": {
+    "title": "Login",
+    "title-su": "Sign Up",
+    "description": "Enter your email below to login to your account",
+    "description-su": "Create a new account",
+    "email": "Email",
+    "password": "Password",
+    "repeat": "Repeat password",
+    "forgot-password": "Forgot your password?",
+    "account": "Don't have an account?",
+    "already-account":"Already have an account?",
+    "signup": "Sign up",
+    "login": "Login"
+  },
+  "EnvVarWarning": {
+    "missing":"Supabase environment variables required",
+    "signin":"Sign in",
+    "signup":"Sign up"
+  },
+  "Chat":{
+    "placeholder": "Type your question here. Press Enter to submit.",
+    "warning": "AI can make mistakes"
+  },
+  "Profil": {
+    "settings": "Profil Settings",
+    "logout": "Logout"
+  }
+}

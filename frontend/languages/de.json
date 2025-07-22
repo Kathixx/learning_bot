@@ -1,0 +1,48 @@
+{
+  "Home": {
+    "greeting": "Hallo!",
+    "greeting-msg": "Das ist meine kleine Version der grandiosen Learnboost App!"
+  },
+  "Cards": {
+    "greeting": "Aufgepasst!",
+    "greeting-msg": "Bald kannst Du hier Lernkarten erstellen. "
+  },
+  "Summary": {
+    "greeting": "Bleib neugierig!",
+    "greeting-msg": "Hier könnte schon bald eine wunderbare Zusammenfassung entstehen!"
+  },
+  "ModusSelector": {
+    "tutor": "Tutor KI",
+    "cards": "Lernkarten",
+    "summary": "Zusammenfassung",
+    "testing": "Test Bot",
+    "chatting": "Lern Bot"
+  },
+  "Login": {
+    "title": "Anmelden",
+    "title-su": "Registrieren",
+    "description": "Zum Anmelden E-Mail eintragen.",
+    "description-su": "Neuen Account erstellen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "repeat": "Passwort wiederholden",
+    "forgot-password": "Passwort vergessen??",
+    "account": "Noch kein Account?",
+    "already-account": "Schon registriert?",
+    "signup": "Registrieren",
+    "login": "Anmelden"
+  },
+  "EnvVarWarning": {
+    "missing":"Supabase Entwicklungsvariablen fehlen.",
+    "signin":"Anmelden",
+    "signup":"Registrieren"
+  },
+  "Chat":{
+    "placeholder": "Stelle eine Frage. Zum Senden Enter drücken.",
+    "warning": "KI kann Fehler machen."
+  },
+  "Profil": {
+    "settings": "Einstellungen",
+    "logout": "Abmelden"
+  }
+}
