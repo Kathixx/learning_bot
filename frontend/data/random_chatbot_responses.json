@@ -3,23 +3,26 @@
     {
       "thinking_response": "Ich überprüfe, ob deine Antwort stimmt...",
       "welcome_message": "Willkommen :)",
-      "ready_message": "Bist du bereit für deine Abfrage? Lade ein PDF hoch und drücke auf 'Abfrage starten' ",
+      "ready_message": "Bist du bereit für deine Abfrage? Lade ein PDF hoch und drücke auf 'Neue Frage' ",
       "waiting_message": "Ich generiere dir deine Frage. Warte...",
-      "call_to_action": "Schreibe deine Antwort in das Feld! Wenn du Enter drückst, überprüfe ich deine Antwort."
+      "call_to_action": "Schreibe deine Antwort in das Feld! Wenn du Enter drückst, überprüfe ich deine Antwort.",
+      "call_to_new_action": "Lass mich eine weitere Frage für dich finden!"
     },
     {
       "thinking_response": "Mal sehen, ob deine Antwort richtig ist...",
       "welcome_message": "Hallo!",
-      "ready_message": "Kann es losgehen? Dann lade ein PDF hoch und drücke auf 'Abfrage starten'",
+      "ready_message": "Kann es losgehen? Dann lade ein PDF hoch und drücke auf 'Neue Frage'",
       "waiting_message": "Einen Moment, ich erstelle deine Frage...",
-      "call_to_action": "Los geht's. Weißt du die Antwort?"
+      "call_to_action": "Los geht's. Weißt du die Antwort?",
+      "call_to_new_action": "Weiter geht's! Generiere eine neue Frage!"
     },
     {
       "thinking_response": "Ich checke deine Antwort, einen Moment...",
       "welcome_message": "Hi du!",
       "ready_message": "Los geht's. Lade dein PDF hoch und starte die Abfrage!",
       "waiting_message": "Ich überlege, welche Frage ich dir stelle...",
-      "call_to_action": "Hau in die Tasten! Ich bin gespannt auf deine Antwort."
+      "call_to_action": "Hau in die Tasten! Ich bin gespannt auf deine Antwort.",
+      "call_to_new_action": "Übung macht die Meisterin! Beantworte noch eine Frage!"
     }
   ]
 }

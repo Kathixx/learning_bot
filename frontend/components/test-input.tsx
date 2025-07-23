@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { MessageType } from "@/types/message"
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from "react"
 import {
   Form,
   FormControl,
@@ -36,7 +35,10 @@ export function TestInput({onSend}:TestInputProps) {
   });
 
   const [showInput, setShowInput] = useState(false);
-
+  const [currentQA, setQA] = useState({
+    Question: "",
+    Answer: ""
+  })
 
   const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
   
@@ -47,8 +49,8 @@ export function TestInput({onSend}:TestInputProps) {
 
   async function getWelcomeMessages() {
     onSend(returnJsonMsg('welcome_message'))
-    await delay(Math.random() * (2000 - 5000) + 5000)
-     onSend(returnJsonMsg('ready_message'))
+    await delay(Math.random() * (1000 - 3000) + 3000)
+    onSend(returnJsonMsg('ready_message'))
   }
 
   function getRandomNumber(){
@@ -56,18 +58,41 @@ export function TestInput({onSend}:TestInputProps) {
   }
 
   async function getAutoResponse(){
+    onSend(returnJsonMsg('thinking_response'))
     await delay(Math.random() * (2000 - 5000) + 5000)
-    onSend(returnJsonMsg('thinking_response'))}
+}
 
-  function onSubmit(values: { message: string }) {
+  async function checkAnswer(values: { message: string }) {
     const questionId = uuidv4()
     onSend({id:questionId, text: values.message, sender:"user"})
-    console.log("counts:" +questionId)
     form.reset()
-    getAutoResponse()
+    await getAutoResponse()
+    setShowInput(false)
+    const updatedQA = {
+      ...currentQA,
+      Answer: values.message
+    }
+    setQA(updatedQA)
+    const jsonData = JSON.stringify(updatedQA)
+    const url = "http://localhost:5002/checkAnswer"
+    fetch(url, {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: jsonData,
+    })
+    .then((response) => response.json())
+      .then((response) => {
+        const checkId = uuidv4()
+        onSend({id:checkId, text: response.Check, sender:"bot"})
+        onSend(returnJsonMsg('call_to_new_action'))
+      })
+
   }
 
-  async function startTest() {
+  function startTest() {
     const randomNumber = getRandomNumber()
     const waitingId = uuidv4()
     onSend({id:waitingId, text: responses.answers[randomNumber].waiting_message, sender:"bot"})
@@ -85,13 +110,17 @@ export function TestInput({onSend}:TestInputProps) {
       .then((response) => {
         const responseId = uuidv4()
         onSend({id:responseId, text: response.Question, sender:"bot"})
+        setQA({
+          ...currentQA,
+          Question: response.Question
+        })
         // await delay(Math.random() * (2000 - 5000) + 5000)
         onSend(returnJsonMsg('call_to_action'))
       })
   }
 
   function returnJsonMsg (
-  msgType: 'waiting_message' | 'thinking_response' | 'ready_message' | 'welcome_message' | 'call_to_action',
+  msgType: 'waiting_message' | 'thinking_response' | 'ready_message' | 'welcome_message' | 'call_to_action' | 'call_to_new_action',
   sender: 'user' | 'bot' = 'bot'
 ): MessageType{
     const currentId = uuidv4()
@@ -114,6 +143,9 @@ export function TestInput({onSend}:TestInputProps) {
       case 'call_to_action':
         currentMsg = responses.answers[randomNumber].call_to_action;
         break;
+      case 'call_to_new_action':
+        currentMsg = responses.answers[randomNumber].call_to_new_action;
+        break;
       default:
         currentMsg = 'Unknown message type';
     }
@@ -131,7 +163,7 @@ export function TestInput({onSend}:TestInputProps) {
     {showInput ? 
       ( <Form {...form}>
       <form 
-        onSubmit={form.handleSubmit(onSubmit)} 
+        onSubmit={form.handleSubmit(checkAnswer)} 
         className="w-full flex items-center justify-between rounded-full bg-background my-shadow h-auto px-5">
         <div className="flex-1">
           <FormField
@@ -142,12 +174,12 @@ export function TestInput({onSend}:TestInputProps) {
                 <FormControl>
                   <Textarea 
                     className="border-none focus-visible:ring-[0px] resize-none pt-3 " 
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        form.handleSubmit(onSubmit)();   
-                      }
-                    }} 
+                    // onKeyDown={(e) => {
+                    //   if (e.key === 'Enter' && !e.shiftKey) {
+                    //     e.preventDefault();
+                    //     form.handleSubmit(checkAnswer)();   
+                    //   }
+                    // }} 
                     placeholder='Enter your answer' {...field} />
                 </FormControl>
                 <FormMessage />
@@ -161,7 +193,7 @@ export function TestInput({onSend}:TestInputProps) {
   <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(startTest)} >
-        <Button className="w-full flex items-center justify-between rounded-full bg-secondary my-shadow h-10 px-5" type="submit" size="lg">Abfrage starten</Button>
+        <Button className="w-full flex items-center justify-between rounded-full bg-secondary my-shadow h-10 px-5" type="submit" size="lg">Neue Frage</Button>
       </form>
     </Form>)}
   

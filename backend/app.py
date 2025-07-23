@@ -15,7 +15,6 @@ from langchain_openai import OpenAI, ChatOpenAI, OpenAIEmbeddings
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain.prompts.prompt import PromptTemplate
 
-# Rakib
 from langchain import hub
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
@@ -179,17 +178,39 @@ def generate_question():
         model_name="gpt-3.5-turbo",
         temperature=3
     )
-    query_en = "You are a teacher who wants to test the students. Generate a question for the students from the give context {information}, which activates deep learning for them. Make sure to provide all the details."
-    query_de = """
-        Du bist ein Lehrer, der seine Schüler testen möchte. Stelle eine Frage, die auf den vorhandenen Informationen {information} basiert. Die Frage soll zum tiefergehenden Nachdenken anregen und den Kern des Dokuments beinhalten.
-        Verwende keine Fachbegriffe. Halte die Sprache einfach. Zitiere wenn nötig aus dem Text, wenn es Kontext braucht, den man wissen muss. """
-
+    # query_en = "You are a teacher who wants to test the students. Generate a question for the students from the give context {information}, which activates deep learning for them. Make sure to provide all the details."
+    query_de = """ 
+        Du bist Lehrkraft. Lies dir das folgende PDF-Dokument aufmerksam durch und fasse es zusammen. Generiere eine kurze, gut verständliche, tiefgründige Frage, die sich direkt auf deine Zusammenfassung bezieht. Die Frage soll nicht bloß Fakten abfragen, sondern dazu anregen, kritisch oder analytisch über das Thema nachzudenken.
+        Berücksichtige dabei:
+        – Was ist die zentrale Aussage oder These?
+        – Was könnte eine Leserin zum Weiterdenken oder Diskutieren anregen?
+        Gib nur die Frage als Ausgabe zurück.
+        """
     retriever = retrieve_from_vector_db("../vector_databases/deepr_vector_db")
     retrieval_chain = connect_chains(retriever)
     output = retrieval_chain.invoke(
         {"input": query_de}
     )
     print ('answer: '+output['answer'])
+    return output['answer']
+
+def getResult(question, answer):
+    load_dotenv()
+    # define LLM
+    llm = ChatOpenAI(
+        model_name="gpt-4.1-nano",
+        temperature=3
+    )
+    query_de = f"""
+    Du bist Lehrkraft. Lies dir das folgende PDF-Dokument aufmerksam durch und beantworte damit die folgende Frage {question}. Vergleiche deine generierte Antwort mit der Schüler-Antwort {answer}. 
+    Erläutere kurz, was an der Schüler-Antwort gut oder schlecht ist. Gehe dabei vor allem auf fehlende Aspekte ein oder Trugschlüsse, sodass der Schüler mit deiner Hilfe eine perfekte Antwort erstellen kann.  Erstelle ein kurzes Schüler-Feedback. Gib nur das Schüler-Feedback zurück und richte dich dabei, direkt an den Schüler selbst. Lobe und motiviere zum weiter Üben.
+    """
+    retriever = retrieve_from_vector_db("../vector_databases/deepr_vector_db")
+    retrieval_chain = connect_chains(retriever)
+    output = retrieval_chain.invoke(
+        {"input": query_de}
+    )
+    print ('checkResult: '+output['answer'])
     return output['answer']
 
 # def get_conversational_chain(tools,ques):
@@ -239,12 +260,13 @@ def after_request(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     return response
 
-@app.route('/check', methods=['POST'])
+@app.route('/checkAnswer', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')
 def check_answer():
     try:
         data = request.get_json()
-        return jsonify({'Answer': data, 'Check': "check ok" })
+        check_result = getResult(data['Question'], data['Answer'])
+        return jsonify({'Check': check_result })
     except Exception as e:
         return jsonify({'error': str(e)})
     
