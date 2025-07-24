@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 type LearnContextType = {
   messages: MessageType[]
   setMessages: React.Dispatch<React.SetStateAction<MessageType[]>>
-  fileName: string
+  filename: string
   setFileName: React.Dispatch<React.SetStateAction<string>>
   addMessage : (newMessage: MessageType) => void
   returnJsonMsg: (
@@ -27,7 +27,7 @@ const useLearnContext = () => useContext(LearnContext)
 export default function LearnBot() {
 
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const [fileName, setFileName] = useState("");
+  const [filename, setFileName] = useState("");
 
   function getRandomNumber(){
       return Math.floor(Math.random() * responses.learnAnswers.length)
@@ -63,10 +63,10 @@ export default function LearnBot() {
       }
 
   return (
-    <LearnContext.Provider value = {{messages, setMessages, fileName, setFileName, addMessage, returnJsonMsg}}>
+    <LearnContext.Provider value = {{messages, setMessages, filename, setFileName, addMessage, returnJsonMsg}}>
 
       <div className="w-full h-full">
-        {fileName === "" ? 
+        {filename === "" ? 
           (<div className="w-full h-full flex items-center justify-center">
             <LearnPDFUpload></LearnPDFUpload>
             </div>):

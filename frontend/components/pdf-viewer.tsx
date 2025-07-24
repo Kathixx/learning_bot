@@ -15,15 +15,18 @@ export function PDFViewer() {
 
   const ctx = useLearnContext();
   if (!ctx) throw new Error("Must be used inside <MessageProvider>");
-  const { fileName } = ctx;
+  const { filename } = ctx;
   
   const toolbarPluginInstance = toolbarPlugin();
   const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
+
+  const filepath = "http://localhost:5002/pdfs/"+filename
 
   const dropPluginInstance = dropPlugin();
 
   const transform: TransformToolbarSlot = (slot: ToolbarSlot) => ({
     ...slot,
+    Open: ()=><></>,
     Search: () => <></>,
     Download: () => <></>,
     DownloadMenuItem: () => <></>,
@@ -45,7 +48,7 @@ export function PDFViewer() {
           <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
         </div>
       </div>
-      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl={fileName} />
+      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl={filepath} />
     </Worker>
   );
 }

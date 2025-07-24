@@ -38,8 +38,8 @@ export function LearnPDFUpload() {
     })
     .then((response) => response.json())
     .then((response) => {
-        console.log("i will set this:", response.Filepath)
-        setFileName (response.Filepath)
+        console.log("i will set this:", response.Filename)
+        setFileName (response.Filename)
         setProcessed(true)
         console.log("filename set.")
     })

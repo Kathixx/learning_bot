@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS, cross_origin
 from datetime import timedelta
 
@@ -226,7 +226,7 @@ def getAnswer(question):
         temperature=3
     )
     query_de = f"""
-    Bedanke dich für die Frage. Lese dir das PDF aufmerksam durch und beantworte die folgende Frage {question}. Achte dabei auf eine einfache, klar verständliche Sprache. Schreibe in kurzen Sätzen. Nehme nur Bezug auf das PDF. Gib Quellen mit an. Gib nur deine Antwort zurück.
+    Bedanke dich für die Frage. Lese dir das PDF aufmerksam durch und beantworte die folgende Frage {question}. Achte dabei auf eine einfache, klar verständliche Sprache. Schreibe in kurzen Sätzen. Nehme nur Bezug auf das PDF. Wenn du eine Frage nicht aus dem Dokument beantworten kannst, schreibe "Diese Frage kann ich leider nicht beantworten". Gib die Seitenangaben mit an. Gib nur deine Antwort zurück.
     """
     retriever = retrieve_from_vector_db("../vector_databases/deepr_vector_db")
     retrieval_chain = connect_chains(retriever)
@@ -335,8 +335,13 @@ def upload_pdf():
     readPDF(filepath)
 
     # You can now read the file and feed it into your RAG logic
-    return jsonify({'message': 'File uploaded successfully', 'Filepath': filepath})
+    return jsonify({'message': 'File uploaded successfully', 'Filepath': filepath, 'Filename': pdf.filename})
 
+# pdf Viewer
+@app.route('/pdfs/<filename>')
+@cross_origin(origin='http://localhost:3000')
+def serve_pdf(filename):
+    return send_from_directory('uploads', filename)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5002)
