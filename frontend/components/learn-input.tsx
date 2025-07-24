@@ -68,16 +68,16 @@ export function LearnInput() {
     <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(getAnswer)} 
-        className="w-full flex items-center justify-between rounded-[20px] bg-background my-shadow h-auto px-5">
+        className="flex h-1/5 rounded-lg bg-background  px-5">
         <div className="flex-1">
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="h-full">
                 <FormControl>
                   <Textarea 
-                    className="border-none focus-visible:ring-[0px] resize-none pt-3 " 
+                    className="border-none focus-visible:ring-[0px] h-full resize-none pt-3 " 
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
                         e.preventDefault();
@@ -91,7 +91,7 @@ export function LearnInput() {
             )}
           />
         </div>
-        <Button className="self-center" type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
+        <Button className="self-end bg-secondary rounded-full text-light mb-5" type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
       </form>
     </Form>
   )

@@ -57,14 +57,14 @@ export function LearnPDFUpload() {
 
 
   return (
-    <div className= "p-4 mb-4 w-[50%] my-shadow rounded-[20px]" >
+    <div className= "p-4 mb-4 w-[50%] rounded-[20px] bg-background -translate-y-1/2" >
       <h1 className="font-extrabold pb-2">{t('upload')}</h1>
       {!selected ?  (<p> {t('none')}</p>) : (!uploaded && <p> {t('selected')}</p>)}
       {uploaded && !processed && <p> {t('uploaded')}</p>}
       {processed && <p> {t('done')}</p>}
       <div className="flex pt-2">
-        <Input className ="rounded-r-none border-third" type="file" accept="application/pdf" onChange={handleChange} />
-        <Button className="items-center rounded-[10px] hover:bg-secondary dark:hover:bg-primary rounded-l-none bg-third font-extrabold text-center text-background  px-5" onClick={uploadPDF}>{t('upload-btn')}</Button>
+        <Input className ="rounded-r-none border-secondary" type="file" accept="application/pdf" onChange={handleChange} />
+        <Button className="items-center rounded-[10px] hover:bg-secondary dark:hover:bg-primary rounded-l-none bg-secondary font-extrabold text-center text-light hover:text-primary  px-5" onClick={uploadPDF}>{t('upload-btn')}</Button>
       </div>
     </div>
   );

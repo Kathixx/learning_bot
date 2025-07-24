@@ -14,10 +14,9 @@ export function ModusSelector() {
 
   
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 bg-background rounded-full px-2">
       <ToggleGroup 
         type="single"
-        className="w-[400px]"
         value={value}
 			  onValueChange={(value) => {
 				if (value == 'learning') router.push("/protected/learning");
@@ -28,8 +27,6 @@ export function ModusSelector() {
 		  >
         <ToggleGroupItem value="learning" className="font-extrabold">{t('learning')}</ToggleGroupItem>
         <ToggleGroupItem value="testing" className="font-extrabold">{t('testing')}</ToggleGroupItem>
-        {/* <ToggleGroupItem value="summary" className="font-extrabold">{t('summary')}</ToggleGroupItem>
-        <ToggleGroupItem value="cards" className="font-extrabold">{t('cards')}</ToggleGroupItem> */}
       </ToggleGroup>
     </div>
   );

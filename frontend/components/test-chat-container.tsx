@@ -15,10 +15,12 @@ export function TestChatContainer() {
  
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden">
-      <p className="absolute right-2 text-xs px-5 italic pt-3">{t('warning')}</p>
-      <div className="w-full overflow-y-auto px-5 pt-[100px] pb-[20px]">
-        <MessageList messages={messages}></MessageList>
+    <div className="w-full h-full overflow-hidden pt-[100px] pb-[20px] pr-4 pl-2">
+      <div className="flex h-full flex-col relative overflow-hidden bg-background rounded-lg p-5">
+        <p className="absolute right-2 text-xs px-5 italic">{t('warning')}</p>
+        <div className="w-full overflow-y-auto pb-[20px] pt-5">
+          <MessageList messages={messages}></MessageList>
+        </div>
       </div>
     </div>
   )

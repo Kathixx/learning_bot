@@ -17,7 +17,7 @@ type Props = {
   setQA: React.Dispatch<React.SetStateAction<QA>>;
 };
 
-export function InputSettings({setQA, currentQA}: Props){
+export function TestInputSettings({setQA, currentQA}: Props){
     const ctx = useTestContext();
     if (!ctx) throw new Error("Must be used inside <MessageProvider>");
     const { addMessage, returnJsonMsg, fileName } = ctx;
@@ -58,7 +58,7 @@ export function InputSettings({setQA, currentQA}: Props){
     }
 
     return(
-        <div className= "grid grid-cols-3 p-4 mb-4 my-shadow rounded-[20px] ">
+        <div className= "grid grid-cols-3 p-4 mb-4 bg-background rounded-lg ">
             <div>
                 <h1 className = "font-extrabold pb-2">{t('type')}</h1>
                 <RadioGroup defaultValue="option-two">
@@ -95,8 +95,9 @@ export function InputSettings({setQA, currentQA}: Props){
             </div>
             <Form {...form}>
                 <form 
+                    className="flex items-end"
                     onSubmit={form.handleSubmit(startTest)} >
-                    <Button className="w-full h-full flex items-center rounded-[10px] bg-third hover:bg-secondary dark:hover:bg-primary font-extrabold text-center text-background  px-5" type="submit" size="lg">{t('generate-btn')}</Button>
+                    <Button className="w-full flex items-center rounded-full bg-secondary  dark:hover:bg-primary font-extrabold text-center text-light hover:text-primary  px-5" type="submit" size="lg">{t('generate-btn')}</Button>
                 </form>
             </Form>
             

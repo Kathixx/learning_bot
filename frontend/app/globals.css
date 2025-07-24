@@ -4,10 +4,24 @@
 
 @layer base {
   :root{
+    --background: 0, 0%, 100%, 50%;
+    --foreground: 0, 0%, 16%;
+    --primary: 43, 100%, 69%; /* #FFD361 yellow */
+    --secondary: 43, 0%, 16%; /* #2A2A2A grey */
+    --light: 0, 0%, 100%; /* weiß */
+    --third: 189, 62%, 29%; /* #1C6976 petrol*/
+    --shadow: 240, 26%, 89%;
+    --popover: 220 14% 96%;
+    --popover-foreground: 240, 29%, 10%;
+    --border: 4, 87%, 62%;
+    --radius: 2rem;
+  }
+  /* 
+  :root{
     --background: 220, 14%, 96%;
     --foreground: 240, 29%, 10%;
-    --primary: 4, 87%, 62%; /* #f2554a */
-    --secondary: 240, 33%, 29%; /* #323262 */
+    --primary: 4, 87%, 62%;  /* #f2554a
+    --secondary: 240, 33%, 29%; /* #323262 
     --third: 235, 15%, 52%;
     --shadow: 240, 26%, 89%;
     --popover: 220 14% 96%;
@@ -15,8 +29,9 @@
     --border: 4, 87%, 62%;
     --radius: 0.5rem;
   }
+  */
   .dark{
-    --background: 240, 29%, 10%;
+    --background: 0, 0%, 100%, 50%;
     --foreground:  220, 14%, 96%;
     --primary: 4, 87%, 62%;
     --secondary: 240, 33%, 29%;
@@ -86,26 +101,25 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background: hsla(40, 88%, 84%, 1);
+    background: linear-gradient(135deg, hsla(40, 88%, 84%, 1) 0%, hsla(0, 0%, 93%, 1) 100%);
+    background: -moz-linear-gradient(135deg, hsla(40, 88%, 84%, 1) 0%, hsla(0, 0%, 93%, 1) 100%);
+    background: -webkit-linear-gradient(135deg, hsla(40, 88%, 84%, 1) 0%, hsla(0, 0%, 93%, 1) 100%);
   }
 }
 
 .rpv-core__inner-page{
-  background-color: var(--background);
+  background-color: transparent;
+  border-radius: 2rem;
 }
 
 .rpv-core__inner-page-container .rpv-core__inner-page {
-  background-color: var(--background);
-}
-
-.my-shadow {
-  box-shadow: 0px 0px 10px 6px #DDDDEB;
+  background-color: transparent;
+  border-radius: 2rem;
 }
 
 
-.dark .my-shadow{
-  box-shadow: 0px 0px 15px 1px rgb(79 79 107);
-}
 
 .my-menu {
   border: none;

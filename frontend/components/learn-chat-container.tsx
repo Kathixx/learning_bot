@@ -17,14 +17,14 @@ export function LearnChatContainer() {
 
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden">
-      <div className="w-full max-h-[82%] h-[82%] overflow-y-auto px-5 pt-[100px]">
-        <MessageList messages={messages}></MessageList>
+     <div className="w-full h-full flex flex-col overflow-hidden pt-[100px] pb-[20px] pr-4 pl-2 gap-4">
+      <div className="flex flex-1 overflow-y-auto relative bg-background rounded-lg p-5">
+        <p className="absolute right-2 text-xs px-5 italic">{t('warning')}</p>
+        <div className="w-full overflow-y-auto pb-[20px] pt-5">
+          <MessageList messages={messages}></MessageList>
+        </div>
       </div>
-      <div className=" w-[50%] px-5 bottom-10 absolute">
-        <LearnInput></LearnInput>
-        <p className="text-right text-xs px-5 italic py-1">{t('warning')}</p>
-      </div>
+      <LearnInput></LearnInput>
     </div>
   )
 }

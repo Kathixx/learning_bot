@@ -2,7 +2,7 @@
 import { PDFViewer } from "@/components/pdf-viewer"
 import { LearnPDFUpload } from "@/components/learn-pdf-upload"
 import { LearnChatContainer } from "@/components/learn-chat-container"
-import { useState, createContext, useContext } from 'react'
+import { useState, createContext, useContext, useEffect } from 'react'
 import { MessageType } from "@/types/message"
 import responses from "@/data/random_chatbot_responses.json"
 import { v4 as uuidv4 } from 'uuid';
@@ -16,6 +16,7 @@ type LearnContextType = {
   returnJsonMsg: (
     msgType:
       | 'thinking_response'
+      | 'welcome_message'
       | 'call_to_new_action',
     sender?: 'user' | 'bot'
   ) => MessageType;
@@ -29,6 +30,14 @@ export default function LearnBot() {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [filename, setFileName] = useState("");
 
+  useEffect(() => {
+      getWelcomeMessages();
+    }, []);
+
+  async function getWelcomeMessages() {
+    addMessage(returnJsonMsg('welcome_message'))
+  }
+
   function getRandomNumber(){
       return Math.floor(Math.random() * responses.learnAnswers.length)
     }
@@ -38,7 +47,7 @@ export default function LearnBot() {
     };
   
     function returnJsonMsg (
-        msgType: 'thinking_response' | 'call_to_new_action',
+        msgType: 'thinking_response' | 'welcome_message' | 'call_to_new_action',
         sender: 'user' | 'bot' = 'bot'
       ): MessageType{
         const currentId = uuidv4()
@@ -48,6 +57,9 @@ export default function LearnBot() {
         switch (msgType) {
           case 'thinking_response':
             currentMsg = responses.learnAnswers[randomNumber].thinking_response;
+            break;
+          case 'welcome_message':
+            currentMsg = responses.learnAnswers[randomNumber].welcome_message;
             break;
           case 'call_to_new_action':
             currentMsg = responses.learnAnswers[randomNumber].call_to_new_action;
@@ -65,13 +77,13 @@ export default function LearnBot() {
   return (
     <LearnContext.Provider value = {{messages, setMessages, filename, setFileName, addMessage, returnJsonMsg}}>
 
-      <div className="w-full h-full">
+      <div className="w-full h-screen ">
         {filename === "" ? 
-          (<div className="w-full h-full flex items-center justify-center">
+          (<div className="w-full h-screen flex items-center justify-center">
             <LearnPDFUpload></LearnPDFUpload>
             </div>):
           ( <div className="w-full h-screen grid grid-cols-2">
-        <div className="w-full justify-center items-center h-screen pt-[100px]">      
+        <div className="w-full h-full flex flex-col pt-[100px] pb-[20px] pr-2 pl-4 overflow-hidden">      
           <PDFViewer></PDFViewer>
         </div>
         <LearnChatContainer></LearnChatContainer>

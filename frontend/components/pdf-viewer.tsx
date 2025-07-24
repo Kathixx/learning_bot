@@ -42,13 +42,15 @@ export function PDFViewer() {
 });
 
   return (
-    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-      <div className="relative">
-        <div className="absolute left-1/2 -translate-x-1/2 z-10 rounded-full bg-background dark:bg-foreground my-shadow">
-          <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
+    <div className="px-4 py-4 w-full h-full bg-background rounded-lg">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+        <div className="relative">
+          <div className="absolute left-1/2 -translate-x-1/2 z-10 rounded-full bg-light border-primary">
+            <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
+          </div>
         </div>
-      </div>
-      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl={filepath} />
-    </Worker>
+        <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl={filepath} />
+      </Worker>
+    </div>
   );
 }

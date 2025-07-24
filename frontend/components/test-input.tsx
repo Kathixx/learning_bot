@@ -81,7 +81,7 @@ export function TestInput({setQA, currentQA}: Props) {
       <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(checkAnswer)} 
-        className="flex h-full rounded-[20px] bg-background my-shadow px-5">
+        className="flex h-full rounded-lg bg-background  px-5">
         <div className="flex-1">
           <FormField
             control={form.control}
@@ -98,7 +98,7 @@ export function TestInput({setQA, currentQA}: Props) {
             )}
           />
         </div>
-        <Button className="self-end" type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
+        <Button className="self-end bg-secondary rounded-full text-light mb-5" type="submit" size="icon"><IconSend2></IconSend2></Button>
       </form>
     </Form>
     </div>

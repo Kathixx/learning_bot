@@ -19,11 +19,12 @@ export async function Nav() {
   } = await supabase.auth.getUser();
 
   return user ? (
-    <nav className="w-full h-16 flex px-4 justify-between items-center gap-20 border-b border-b-secondary my-shadow  ">
-      <Link href="/"><Image src="/logo.png" width={200} height={50} alt="Learnboost small Logo"></Image></Link>
-      <ModusSelector/>   
+    <nav className="w-full h-16 flex px-4 justify-between items-center gap-20  ">
+      <Link href="/"><Image src="/logo.png" width={120} height={10} alt="Learnboost small Logo"></Image></Link>
+       
       <div className="flex justify-end gap-3 w-[200px]">
-        <div className="flex flex-row">
+        <ModusSelector/>  
+        <div className="flex flex-row bg-background rounded-full">
           <LanguageToggle/>
           <ThemeSwitcher />
         </div>

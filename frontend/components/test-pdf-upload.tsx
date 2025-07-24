@@ -57,14 +57,14 @@ export function TestPDFUpload() {
 
 
   return (
-    <div className= "p-4 mb-4 my-shadow h-fit rounded-[20px]" >
+    <div className= "p-4 mb-4 bg-background h-fit rounded-lg" >
       <h1 className="font-extrabold pb-2">{t('upload')}</h1>
       {!selected ?  (<p> {t('none')}</p>) : (!uploaded && <p> {t('selected')}</p>)}
       {uploaded && !processed && <p> {t('uploaded')}</p>}
       {processed && <p> {t('done')}</p>}
       <div className="flex pt-2">
-        <Input className ="rounded-r-none border-third" type="file" accept="application/pdf" onChange={handleChange} />
-        <Button className="items-center rounded-[10px] hover:bg-secondary dark:hover:bg-primary rounded-l-none bg-third font-extrabold text-center text-background  px-5" onClick={uploadPDF}>{t('upload-btn')}</Button>
+        <Input className ="rounded-full rounded-r-none border-secondary" type="file" accept="application/pdf" onChange={handleChange} />
+        <Button className="items-center rounded-full dark:hover:bg-primary rounded-l-none bg-secondary font-extrabold text-center text-light  px-5" onClick={uploadPDF}>{t('upload-btn')}</Button>
       </div>
     </div>
   );

@@ -97,7 +97,7 @@ export default function TestBot() {
   return (
     <TestContext.Provider value = {{messages, setMessages, fileName, setFileName, addMessage, returnJsonMsg}}>
       <div className="w-full h-screen grid grid-cols-2">
-        <div className = "border-r border-r-secondary my-shadow">
+        <div>
           <TestInputContainer></TestInputContainer>
         </div>
         <div className="w-full justify-center items-center h-screen ">      
