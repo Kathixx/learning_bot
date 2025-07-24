@@ -20,13 +20,13 @@ export function ModusSelector() {
         className="w-[400px]"
         value={value}
 			  onValueChange={(value) => {
-				if (value == 'chatting') router.push("/protected/chatting");
+				if (value == 'learning') router.push("/protected/learning");
         if (value == 'testing') router.push("/protected/testing");
         // if (value == 'cards') router.push("/protected/cards");
         setValue(value);
         }}
 		  >
-        <ToggleGroupItem value="chatting" className="font-extrabold">{t('chatting')}</ToggleGroupItem>
+        <ToggleGroupItem value="learning" className="font-extrabold">{t('learning')}</ToggleGroupItem>
         <ToggleGroupItem value="testing" className="font-extrabold">{t('testing')}</ToggleGroupItem>
         {/* <ToggleGroupItem value="summary" className="font-extrabold">{t('summary')}</ToggleGroupItem>
         <ToggleGroupItem value="cards" className="font-extrabold">{t('cards')}</ToggleGroupItem> */}

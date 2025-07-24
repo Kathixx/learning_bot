@@ -173,7 +173,6 @@ def readPDF(filename):
 #     return question
 
 def generate_question():
-
     # laod credentials
     load_dotenv()
     # define LLM
@@ -197,6 +196,7 @@ def generate_question():
     print ('answer: '+output['answer'])
     return output['answer']
 
+
 def getResult(question, answer):
     load_dotenv()
     # define LLM
@@ -214,6 +214,25 @@ def getResult(question, answer):
         {"input": query_de}
     )
     print ('checkResult: '+output['answer'])
+    return output['answer']
+
+def getAnswer(question):
+    print("I will get the answer")
+    print(question)
+    load_dotenv()
+    # define LLM
+    llm = ChatOpenAI(
+        model_name="gpt-4.1-nano",
+        temperature=3
+    )
+    query_de = f"""
+    Bedanke dich für die Frage. Lese dir das PDF aufmerksam durch und beantworte die folgende Frage {question}. Achte dabei auf eine einfache, klar verständliche Sprache. Schreibe in kurzen Sätzen. Nehme nur Bezug auf das PDF. Gib Quellen mit an. Gib nur deine Antwort zurück.
+    """
+    retriever = retrieve_from_vector_db("../vector_databases/deepr_vector_db")
+    retrieval_chain = connect_chains(retriever)
+    output = retrieval_chain.invoke(
+        {"input": query_de}
+    )
     return output['answer']
 
 # def get_conversational_chain(tools,ques):
@@ -263,6 +282,7 @@ def after_request(response):
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
     return response
 
+# TestBot
 @app.route('/checkAnswer', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')
 def check_answer():
@@ -273,6 +293,7 @@ def check_answer():
     except Exception as e:
         return jsonify({'error': str(e)})
     
+# TestBot
 @app.route('/getQuestion', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')
 def getQuestion():
@@ -284,7 +305,20 @@ def getQuestion():
         return jsonify({'Question': question})
     except Exception as e:
         return jsonify({'error': str(e)})
+    
+# LearnBot
+@app.route('/getAnswer', methods=['POST'])
+@cross_origin(origin='http://localhost:3000')
+def get_answer():
+    try:
+        data = request.get_json()
+        print(data)
+        answer = getAnswer(data['question'])
+        return jsonify({'Answer': answer })
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
+# upload component
 @app.route('/upload', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')
 def upload_pdf():

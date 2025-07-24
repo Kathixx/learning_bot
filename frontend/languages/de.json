@@ -5,7 +5,7 @@
   },
   "ModusSelector": {
     "testing": "Test Bot",
-    "chatting": "Lern Bot"
+    "learning": "Lern Bot"
   },
   "TestBot": {
     "upload": "PDF Upload",
@@ -46,7 +46,13 @@
   },
   "Chat":{
     "placeholder": "Stelle eine Frage. Zum Senden Enter drücken.",
-    "warning": "KI kann Fehler machen."
+    "warning": "KI kann Fehler machen.",
+    "upload": "PDF Upload",
+    "none": "Bevor es losgehen kann, musst du ein PDF hochladen. Bitte wähle ein PDF.",
+    "selected": "PDF ausgewählt. Bitte klick 'hochladen'.",
+    "uploaded": "Ich lese dein PDF...",
+    "done": "Fertig. Los geht's!",
+    "upload-btn": "hochladen"
   },
   "Profil": {
     "settings": "Einstellungen",

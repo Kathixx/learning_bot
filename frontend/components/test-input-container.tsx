@@ -1,6 +1,6 @@
 "use client"
 import { TestInput } from "@/components/test-input"
-import { PDFUpload } from "@/components/pdf-upload";
+import { TestPDFUpload } from "@/components/test-pdf-upload";
 import { InputSettings } from "@/components/input-settings";
 import { useState } from 'react'
 
@@ -16,7 +16,7 @@ export function TestInputContainer() {
   return (
     <div className="w-full h-full overflow-hidden pt-[100px] pb-[40px] pr-4 pl-4 flex flex-col">
       <div>
-        <PDFUpload></PDFUpload>
+        <TestPDFUpload></TestPDFUpload>
       </div>
       <div> 
         <InputSettings currentQA={currentQA} setQA={setQA}></InputSettings>

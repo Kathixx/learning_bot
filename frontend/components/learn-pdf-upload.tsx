@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { useTestContext } from "@/app/[locale]/protected/testing/page"
+import { useLearnContext } from "@/app/[locale]/protected/learning/page"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useTranslations } from 'next-intl';
 
 
-export function PDFUpload() {
+export function LearnPDFUpload() {
 
-    const t = useTranslations('TestBot');
+    const t = useTranslations('Chat');
   
-    const ctx = useTestContext();
+    const ctx = useLearnContext();
     if (!ctx) throw new Error("Must be used inside <MessageProvider>");
     const { setFileName } = ctx;
 
@@ -57,7 +57,7 @@ export function PDFUpload() {
 
 
   return (
-    <div className= "p-4 mb-4 my-shadow rounded-[20px]" >
+    <div className= "p-4 mb-4 w-[50%] my-shadow rounded-[20px]" >
       <h1 className="font-extrabold pb-2">{t('upload')}</h1>
       {!selected ?  (<p> {t('none')}</p>) : (!uploaded && <p> {t('selected')}</p>)}
       {uploaded && !processed && <p> {t('uploaded')}</p>}

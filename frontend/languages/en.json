@@ -5,7 +5,7 @@
   },
   "ModusSelector": {
     "testing": "Test Bot",
-    "chatting": "Learn Bot"
+    "learning": "Learn Bot"
   },
   "TestBot": {
     "upload": "PDF Upload",
@@ -46,7 +46,13 @@
   },
   "Chat":{
     "placeholder": "Type your question here. Press Enter to submit.",
-    "warning": "AI can make mistakes"
+    "warning": "AI can make mistakes",
+    "upload": "PDF Upload",
+    "none": "Before we can start, you have to upload a pdf. Please select a pdf.",
+    "selected": "PDF selected. Please press 'upload'.",
+    "uploaded": "I'm reading your pdf...",
+    "done": "Done. I'm ready!",
+    "upload-btn": "upload"
   },
   "Profil": {
     "settings": "Profil Settings",

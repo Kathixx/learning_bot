@@ -1,5 +1,4 @@
 'use client'
-// import {PDFViewer} from "@/components/pdf-viewer"
 import {TestChatContainer} from "@/components/test-chat-container"
 import {TestInputContainer} from "@/components/test-input-container"
 import { useState, createContext, useContext, useEffect} from 'react'
@@ -7,7 +6,6 @@ import { MessageType } from "@/types/message"
 import responses from "@/data/random_chatbot_responses.json"
 import { v4 as uuidv4 } from 'uuid';
 
-// messages, setMessages, addMessage, returnJsonMsg
 type TestContextType = {
   messages: MessageType[]
   setMessages: React.Dispatch<React.SetStateAction<MessageType[]>>
@@ -37,14 +35,11 @@ export default function TestBot() {
   const [fileName, setFileName] = useState("");
 
 
-
   useEffect(() => {
-    // Your custom function
     getWelcomeMessages();
   }, []);
 
   const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
-
 
   async function getWelcomeMessages() {
     addMessage(returnJsonMsg('welcome_message'))
@@ -53,7 +48,7 @@ export default function TestBot() {
   }
 
   function getRandomNumber(){
-    return Math.floor(Math.random() * responses.answers.length)
+    return Math.floor(Math.random() * responses.testAnswers.length)
   }
 
   const addMessage = (newMessage: MessageType) => {
@@ -70,22 +65,22 @@ export default function TestBot() {
   
       switch (msgType) {
         case 'waiting_message':
-          currentMsg = responses.answers[randomNumber].waiting_message
+          currentMsg = responses.testAnswers[randomNumber].waiting_message
           break;
         case 'thinking_response':
-          currentMsg = responses.answers[randomNumber].thinking_response;
+          currentMsg = responses.testAnswers[randomNumber].thinking_response;
           break;
         case 'ready_message':
-          currentMsg = responses.answers[randomNumber].ready_message;
+          currentMsg = responses.testAnswers[randomNumber].ready_message;
           break;
         case 'welcome_message':
-          currentMsg = responses.answers[randomNumber].welcome_message;
+          currentMsg = responses.testAnswers[randomNumber].welcome_message;
           break;
         case 'call_to_action':
-          currentMsg = responses.answers[randomNumber].call_to_action;
+          currentMsg = responses.testAnswers[randomNumber].call_to_action;
           break;
         case 'call_to_new_action':
-          currentMsg = responses.answers[randomNumber].call_to_new_action;
+          currentMsg = responses.testAnswers[randomNumber].call_to_new_action;
           break;
         default:
           currentMsg = 'Unknown message type';

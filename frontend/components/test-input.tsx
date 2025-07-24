@@ -74,7 +74,6 @@ export function TestInput({setQA, currentQA}: Props) {
         addMessage({id:checkId, text: response.Check, sender:"bot"})
         addMessage(returnJsonMsg('call_to_new_action'))
       })
-
   }
 
   return (

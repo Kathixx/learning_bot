@@ -1,5 +1,5 @@
 "use client";
-
+import { useLearnContext } from "@/app/[locale]/protected/learning/page"
 import { Worker, Viewer } from "@react-pdf-viewer/core"
 import { dropPlugin } from "@react-pdf-viewer/drop"
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar"
@@ -12,6 +12,10 @@ import '@react-pdf-viewer/drop/lib/styles/index.css';
 
 
 export function PDFViewer() {
+
+  const ctx = useLearnContext();
+  if (!ctx) throw new Error("Must be used inside <MessageProvider>");
+  const { fileName } = ctx;
   
   const toolbarPluginInstance = toolbarPlugin();
   const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
@@ -41,7 +45,7 @@ export function PDFViewer() {
           <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
         </div>
       </div>
-      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl="/nachhaltigkeit.pdf" />
+      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl={fileName} />
     </Worker>
   );
 }

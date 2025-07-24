@@ -1,5 +1,5 @@
 {
-  "answers": [
+  "testAnswers": [
     {
       "thinking_response": "Ich überprüfe, ob deine Antwort stimmt...",
       "welcome_message": "Willkommen :)",
@@ -23,6 +23,20 @@
       "waiting_message": "Ich überlege, welche Frage ich dir stelle...",
       "call_to_action": "Hau in die Tasten! Ich bin gespannt auf deine Antwort.",
       "call_to_new_action": "Übung macht die Meisterin! Beantworte noch eine Frage!"
+    }
+  ],
+  "learnAnswers": [
+    {
+      "thinking_response": "Ich denke nach...",
+      "call_to_new_action": "Was möchtest du noch wissen?"
+    },
+    {
+      "thinking_response": "Lass mich mal überlegen...",
+      "call_to_new_action": "Wie kann ich dir sonst noch weiterhelfen?"
+    },
+    {
+      "thinking_response": "Warte kurz...",
+      "call_to_new_action": "Kann ich noch was für dich tun?"
     }
   ]
 }
