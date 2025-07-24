@@ -5,6 +5,7 @@ import { Form } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslations } from 'next-intl';
 
 type QA = {
   Question: string;
@@ -21,6 +22,8 @@ export function InputSettings({setQA, currentQA}: Props){
     if (!ctx) throw new Error("Must be used inside <MessageProvider>");
     const { addMessage, returnJsonMsg, fileName } = ctx;
 
+    const t = useTranslations('TestBot');
+    
     
     const form = useForm({
         defaultValues: {
@@ -55,45 +58,45 @@ export function InputSettings({setQA, currentQA}: Props){
     }
 
     return(
-        <div className= "grid grid-cols-3 p-4 m-4 my-shadow rounded-[20px] ">
+        <div className= "grid grid-cols-3 p-4 mb-4 my-shadow rounded-[20px] ">
             <div>
-                <h1 className = "font-extrabold pb-2">Type of question</h1>
+                <h1 className = "font-extrabold pb-2">{t('type')}</h1>
                 <RadioGroup defaultValue="option-two">
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="option-one" id="option-one" />
-                        <Label htmlFor="option-one">Faktenwissen</Label>
+                        <Label htmlFor="option-one">{t('fact')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="option-two" id="option-two" />
-                        <Label htmlFor="option-two">Tiefergehende Frage</Label>
+                        <Label htmlFor="option-two">{t('deep')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="option-three" id="option-three" />
-                        <Label htmlFor="option-three">Detailfrage</Label>
+                        <Label htmlFor="option-three">{t('general')}</Label>
                     </div>
                 </RadioGroup>
             </div>
             <div>
-                <h1 className = "font-extrabold pb-2">Level</h1>
+                <h1 className = "font-extrabold pb-2">{t('level')}</h1>
                 <RadioGroup defaultValue="beginner">
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="beginner" id="beginner" />
-                        <Label htmlFor="beginner">Einfach</Label>
+                        <Label htmlFor="beginner">{t('beginner')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="advanced" id="advanced" />
-                        <Label htmlFor="advanced">Mittel</Label>
+                        <Label htmlFor="advanced">{t('advanced')}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                         <RadioGroupItem value="expert" id="expert" />
-                        <Label htmlFor="expert">Schwer</Label>
+                        <Label htmlFor="expert">{t('expert')}</Label>
                     </div>
                 </RadioGroup>
             </div>
             <Form {...form}>
                 <form 
                     onSubmit={form.handleSubmit(startTest)} >
-                    <Button className="w-full h-full flex items-center rounded-[10px] bg-third font-extrabold text-center text-background  px-5" type="submit" size="lg">Neue Frage generieren</Button>
+                    <Button className="w-full h-full flex items-center rounded-[10px] bg-third hover:bg-secondary dark:hover:bg-primary font-extrabold text-center text-background  px-5" type="submit" size="lg">{t('generate-btn')}</Button>
                 </form>
             </Form>
             

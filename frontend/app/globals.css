@@ -20,6 +20,7 @@
     --foreground:  220, 14%, 96%;
     --primary: 4, 87%, 62%;
     --secondary: 240, 33%, 29%;
+    --third: 9, 84%, 80%;
     --shadow: 240, 26%, 89%;
     --popover: 240, 29%, 10%;
     --popover-foreground: 220, 14%, 96%;
@@ -100,6 +101,7 @@
 .my-shadow {
   box-shadow: 0px 0px 10px 6px #DDDDEB;
 }
+
 
 .dark .my-shadow{
   box-shadow: 0px 0px 15px 1px rgb(79 79 107);

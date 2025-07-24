@@ -4,11 +4,26 @@
     "greeting-msg": "Evidence based learning through testing!"
   },
   "ModusSelector": {
-    "tutor": "Tutor AI",
-    "cards": "Cards",
-    "summary": "Summary",
     "testing": "Test Bot",
     "chatting": "Learn Bot"
+  },
+  "TestBot": {
+    "upload": "PDF Upload",
+    "none": "Please select a pdf.",
+    "selected": "PDF selected. Please press 'upload'.",
+    "uploaded": "I'm reading your pdf...",
+    "done": "Done. I'm ready!",
+    "upload-btn": "upload",
+    "type": "Type of question",
+    "fact": "factual question",
+    "deep": "in-depth question",
+    "general": "general question",
+    "level": "Level",
+    "beginner": "beginner",
+    "advanced":"advanced",
+    "expert":"expert",
+    "generate-btn": "create new question",
+    "placeholder": "Enter your answer"
   },
   "Login": {
     "title": "Login",

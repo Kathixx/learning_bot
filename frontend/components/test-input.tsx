@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { IconSend2 } from "@tabler/icons-react"
-// import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 
 type QA = {
@@ -31,7 +31,8 @@ export function TestInput({setQA, currentQA}: Props) {
   if (!ctx) throw new Error("Must be used inside <MessageProvider>");
   const { addMessage, returnJsonMsg } = ctx;
   
-  // const t = useTranslations('Chat')
+  const t = useTranslations('TestBot')
+  
   const form = useForm({
     defaultValues: {
       message: "",
@@ -77,28 +78,28 @@ export function TestInput({setQA, currentQA}: Props) {
   }
 
   return (
-    <div>
+    <div className="h-full">
       <Form {...form}>
       <form 
         onSubmit={form.handleSubmit(checkAnswer)} 
-        className="flex items-center rounded-[20px] bg-background my-shadow h-auto px-5 m-4">
+        className="flex h-full rounded-[20px] bg-background my-shadow px-5">
         <div className="flex-1">
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="h-full">
                 <FormControl>
                   <Textarea 
-                    className="border-none focus-visible:ring-[0px] resize-none pt-3 "  
-                    placeholder='Enter your answer' {...field} />
+                    className="border-none focus-visible:ring-[0px] h-full resize-none pt-3 "  
+                    placeholder={t('placeholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
         </div>
-        <Button type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
+        <Button className="self-end" type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
       </form>
     </Form>
     </div>

@@ -4,11 +4,26 @@
     "greeting-msg": "Evidenzbasiertes Lernen durch Testen!"
   },
   "ModusSelector": {
-    "tutor": "Tutor KI",
-    "cards": "Lernkarten",
-    "summary": "Zusammenfassung",
     "testing": "Test Bot",
     "chatting": "Lern Bot"
+  },
+  "TestBot": {
+    "upload": "PDF Upload",
+    "none": "Bitte wähle ein PDF.",
+    "selected": "PDF ausgewählt. Bitte klick 'hochladen'.",
+    "uploaded": "Ich lese dein PDF...",
+    "done": "Fertig. Los geht's!",
+    "upload-btn": "hochladen",
+    "type": "Fragentyp",
+    "fact": "Faktenfrage",
+    "deep": "Tiefergehende Frage",
+    "general": "Kontextfrage",
+    "level": "Level",
+    "beginner": "Einfach",
+    "advanced":"Mittel",
+    "expert":"Schwer",
+    "generate-btn": "Neue Frage erstellen",
+    "placeholder": "Schreibe deine Antwort"
   },
   "Login": {
     "title": "Anmelden",

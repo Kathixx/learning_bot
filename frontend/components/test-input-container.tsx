@@ -14,14 +14,14 @@ export function TestInputContainer() {
   })
 
   return (
-    <div className="w-full h-full overflow-hidden pt-[100px]">
+    <div className="w-full h-full overflow-hidden pt-[100px] pb-[40px] pr-4 pl-4 flex flex-col">
       <div>
         <PDFUpload></PDFUpload>
       </div>
       <div> 
         <InputSettings currentQA={currentQA} setQA={setQA}></InputSettings>
       </div>
-      <div>
+      <div className="flex-1">
         <TestInput currentQA={currentQA} setQA={setQA}></TestInput>
       </div>
     </div>
