@@ -1,7 +1,8 @@
+'use client'
 import {PDFViewer} from "@/components/pdf-viewer"
 import {ChatContainer} from "@/components/chat-container"
 
-export default async function LearnBot() {
+export default function LearnBot() {
 
   return (
     <div className="w-full h-screen grid grid-cols-2">

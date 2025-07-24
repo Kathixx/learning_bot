@@ -1,15 +1,7 @@
 {
   "Home": {
     "greeting": "Welcome!",
-    "greeting-msg": "This is my version of the fabulous Learnboost App!"
-  },
-  "Cards": {
-    "greeting": "Stay tuned!",
-    "greeting-msg": "You'll soon be able to create magic cards here! "
-  },
-  "Summary": {
-    "greeting": "Stay tuned!",
-    "greeting-msg": "This could be the space for a wonderful summary!"
+    "greeting-msg": "Evidence based learning through testing!"
   },
   "ModusSelector": {
     "tutor": "Tutor AI",

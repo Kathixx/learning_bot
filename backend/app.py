@@ -43,13 +43,14 @@ app.config.update(
 CORS(app, resources={
     r"/*": {
         "origins": "*",
-        # "origins": "http://localhost:5173",
         "methods": ["POST","GET" "OPTIONS"],
         "allow_headers": ["Content-Type"],
         "supports_credentials": True 
     }
 })
 
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def load_pdf_data(pdf_path):
     loader = PyPDFLoader(file_path=pdf_path)
@@ -124,14 +125,15 @@ def connect_chains(retriever):
     return retrieval_chain
 
 
-def readPDF():
+def readPDF(filename):
+    print("reading the pdf...")
     # text = ""
     # documents = load_pdf_data(pdf_path = "documents/test_document.pdf")
     # for pdf in documents:
     #     pdf_reader = PdfReader(pdf)
     #     for page in pdf_reader.pages:
     #         text += page.extract_text()
-    doc = load_pdf_data(pdf_path = "documents/test_document.pdf")
+    doc = load_pdf_data(pdf_path = filename)
     doc_chunks = get_chunks(doc)
     create_embedding_vector_db(chunks=doc_chunks, db_name="deepr")
     # vector_store(text_chunks)
@@ -171,6 +173,7 @@ def readPDF():
 #     return question
 
 def generate_question():
+
     # laod credentials
     load_dotenv()
     # define LLM
@@ -270,12 +273,35 @@ def check_answer():
     except Exception as e:
         return jsonify({'error': str(e)})
     
-@app.route('/getQuestion', methods=['GET'])
+@app.route('/getQuestion', methods=['POST'])
 @cross_origin(origin='http://localhost:3000')
 def getQuestion():
-    readPDF()
-    question = generate_question()
-    return jsonify({'Question': question})
+    try:
+        data = request.get_json()
+        print(data)
+        print(data['filename'])
+        question = generate_question()
+        return jsonify({'Question': question})
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+@app.route('/upload', methods=['POST'])
+@cross_origin(origin='http://localhost:3000')
+def upload_pdf():
+    if 'pdf' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+
+    pdf = request.files['pdf']
+    if pdf.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+
+    filepath = os.path.join(UPLOAD_FOLDER, pdf.filename)
+    pdf.save(filepath)
+
+    readPDF(filepath)
+
+    # You can now read the file and feed it into your RAG logic
+    return jsonify({'message': 'File uploaded successfully', 'Filepath': filepath})
 
 
 if __name__ == "__main__":

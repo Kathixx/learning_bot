@@ -1,15 +1,7 @@
 {
   "Home": {
     "greeting": "Hallo!",
-    "greeting-msg": "Das ist meine kleine Version der grandiosen Learnboost App!"
-  },
-  "Cards": {
-    "greeting": "Aufgepasst!",
-    "greeting-msg": "Bald kannst Du hier Lernkarten erstellen. "
-  },
-  "Summary": {
-    "greeting": "Bleib neugierig!",
-    "greeting-msg": "Hier könnte schon bald eine wunderbare Zusammenfassung entstehen!"
+    "greeting-msg": "Evidenzbasiertes Lernen durch Testen!"
   },
   "ModusSelector": {
     "tutor": "Tutor KI",

@@ -133,6 +133,7 @@ vector_databases/
 
 # backend things
 backend/documents
+backend/uploads
 backend/.DS_Store
 
 

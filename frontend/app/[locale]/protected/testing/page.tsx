@@ -1,15 +1,116 @@
+'use client'
 // import {PDFViewer} from "@/components/pdf-viewer"
-import {TestContainer} from "@/components/test-container"
+import {TestChatContainer} from "@/components/test-chat-container"
+import {TestInputContainer} from "@/components/test-input-container"
+import { useState, createContext, useContext, useEffect} from 'react'
+import { MessageType } from "@/types/message"
+import responses from "@/data/random_chatbot_responses.json"
+import { v4 as uuidv4 } from 'uuid';
 
-export default async function TestBot() {
+// messages, setMessages, addMessage, returnJsonMsg
+type TestContextType = {
+  messages: MessageType[]
+  setMessages: React.Dispatch<React.SetStateAction<MessageType[]>>
+  fileName: string
+  setFileName: React.Dispatch<React.SetStateAction<string>>
+  addMessage : (newMessage: MessageType) => void
+  returnJsonMsg: (
+    msgType:
+      | 'waiting_message'
+      | 'thinking_response'
+      | 'ready_message'
+      | 'welcome_message'
+      | 'call_to_action'
+      | 'call_to_new_action',
+    sender?: 'user' | 'bot'
+  ) => MessageType;
+};
+
+
+const TestContext = createContext <TestContextType|null>(null)
+const useTestContext = () => useContext(TestContext)
+
+
+export default function TestBot() {
+
+  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [fileName, setFileName] = useState("");
+
+
+
+  useEffect(() => {
+    // Your custom function
+    getWelcomeMessages();
+  }, []);
+
+  const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
+
+
+  async function getWelcomeMessages() {
+    addMessage(returnJsonMsg('welcome_message'))
+    await delay(Math.random() * (1000 - 3000) + 3000)
+    addMessage(returnJsonMsg('ready_message'))
+  }
+
+  function getRandomNumber(){
+    return Math.floor(Math.random() * responses.answers.length)
+  }
+
+  const addMessage = (newMessage: MessageType) => {
+    setMessages(prev => [...prev, newMessage]);
+  };
+
+  function returnJsonMsg (
+      msgType: 'waiting_message' | 'thinking_response' | 'ready_message' | 'welcome_message' | 'call_to_action' | 'call_to_new_action',
+      sender: 'user' | 'bot' = 'bot'
+    ): MessageType{
+      const currentId = uuidv4()
+      const randomNumber = getRandomNumber()
+      let currentMsg = ''
+  
+      switch (msgType) {
+        case 'waiting_message':
+          currentMsg = responses.answers[randomNumber].waiting_message
+          break;
+        case 'thinking_response':
+          currentMsg = responses.answers[randomNumber].thinking_response;
+          break;
+        case 'ready_message':
+          currentMsg = responses.answers[randomNumber].ready_message;
+          break;
+        case 'welcome_message':
+          currentMsg = responses.answers[randomNumber].welcome_message;
+          break;
+        case 'call_to_action':
+          currentMsg = responses.answers[randomNumber].call_to_action;
+          break;
+        case 'call_to_new_action':
+          currentMsg = responses.answers[randomNumber].call_to_new_action;
+          break;
+        default:
+          currentMsg = 'Unknown message type';
+      }
+      return {
+        id: currentId,
+        text: currentMsg,
+        sender: sender,
+      }
+    }
+
+   
 
   return (
-    <div className="w-full h-screen grid grid-cols-2">
-      <div className="w-full justify-center items-center h-screen pt-[100px]">      
-        {/* <PDFViewer></PDFViewer> */}
-        <div></div>
+    <TestContext.Provider value = {{messages, setMessages, fileName, setFileName, addMessage, returnJsonMsg}}>
+      <div className="w-full h-screen grid grid-cols-2">
+        <div className = "border-r border-r-secondary my-shadow">
+          <TestInputContainer></TestInputContainer>
+        </div>
+        <div className="w-full justify-center items-center h-screen ">      
+          <TestChatContainer></TestChatContainer>
+        </div>
       </div>
-      <TestContainer></TestContainer>
-    </div>
+    </TestContext.Provider>
   );
 }
+
+export {useTestContext}

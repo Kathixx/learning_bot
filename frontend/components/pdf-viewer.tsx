@@ -1,20 +1,22 @@
 "use client";
 
-import { Worker } from "@react-pdf-viewer/core"
-import { Viewer } from "@react-pdf-viewer/core"
+import { Worker, Viewer } from "@react-pdf-viewer/core"
+import { dropPlugin } from "@react-pdf-viewer/drop"
 import { toolbarPlugin } from "@react-pdf-viewer/toolbar"
 import type { ToolbarSlot, TransformToolbarSlot } from "@react-pdf-viewer/toolbar"
 
 import "@react-pdf-viewer/core/lib/styles/index.css"
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import "@react-pdf-viewer/toolbar/lib/styles/index.css"
+import '@react-pdf-viewer/drop/lib/styles/index.css';
 
 
 export function PDFViewer() {
+  
   const toolbarPluginInstance = toolbarPlugin();
-
   const { renderDefaultToolbar, Toolbar } = toolbarPluginInstance;
 
+  const dropPluginInstance = dropPlugin();
 
   const transform: TransformToolbarSlot = (slot: ToolbarSlot) => ({
     ...slot,
@@ -39,7 +41,7 @@ export function PDFViewer() {
           <Toolbar>{renderDefaultToolbar(transform)}</Toolbar>
         </div>
       </div>
-      <Viewer plugins={[toolbarPluginInstance]} fileUrl="/nachhaltigkeit.pdf"/>
+      <Viewer plugins={[toolbarPluginInstance, dropPluginInstance]} fileUrl="/nachhaltigkeit.pdf" />
     </Worker>
   );
 }

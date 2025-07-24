@@ -6,8 +6,9 @@
   :root{
     --background: 220, 14%, 96%;
     --foreground: 240, 29%, 10%;
-    --primary: 4, 87%, 62%;
-    --secondary: 240, 33%, 29%;
+    --primary: 4, 87%, 62%; /* #f2554a */
+    --secondary: 240, 33%, 29%; /* #323262 */
+    --third: 235, 15%, 52%;
     --shadow: 240, 26%, 89%;
     --popover: 220 14% 96%;
     --popover-foreground: 240, 29%, 10%;
