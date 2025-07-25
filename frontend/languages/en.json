@@ -3,9 +3,12 @@
     "greeting": "Welcome!",
     "greeting-msg": "Evidence based learning through testing!"
   },
-  "ModusSelector": {
+  "Nav": {
     "testing": "Test Bot",
-    "learning": "Learn Bot"
+    "learning": "Learn Bot",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   },
   "TestBot": {
     "upload": "PDF Upload",

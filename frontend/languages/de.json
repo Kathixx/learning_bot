@@ -1,11 +1,14 @@
 {
   "Home": {
     "greeting": "Hallo!",
-    "greeting-msg": "Evidenzbasiertes Lernen durch Testen!"
+    "greeting-msg": "Lernen leicht gemacht"
   },
-  "ModusSelector": {
+  "Nav": {
     "testing": "Test Bot",
-    "learning": "Lern Bot"
+    "learning": "Lern Bot",
+    "light": "Hell",
+    "dark": "Dunkel",
+    "system": "System"
   },
   "TestBot": {
     "upload": "PDF Upload",

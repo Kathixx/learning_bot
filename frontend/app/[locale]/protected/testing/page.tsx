@@ -1,7 +1,7 @@
 'use client'
 import {TestChatContainer} from "@/components/test-chat-container"
 import {TestInputContainer} from "@/components/test-input-container"
-import { useState, createContext, useContext, useEffect} from 'react'
+import { useState, createContext, useContext, useEffect, useRef} from 'react'
 import { MessageType } from "@/types/message"
 import responses from "@/data/random_chatbot_responses.json"
 import { v4 as uuidv4 } from 'uuid';
@@ -33,11 +33,16 @@ export default function TestBot() {
 
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [fileName, setFileName] = useState("");
+  const welcomeSet = useRef(false);
 
 
+  
   useEffect(() => {
-    getWelcomeMessages();
-  }, []);
+    if(!welcomeSet.current){
+      getWelcomeMessages();
+      welcomeSet.current = true
+    }
+    }, []);
 
   const delay = (ms: number): Promise<void> => new Promise((res) => setTimeout(res, ms));
 

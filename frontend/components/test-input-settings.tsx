@@ -97,7 +97,7 @@ export function TestInputSettings({setQA, currentQA}: Props){
                 <form 
                     className="flex items-end"
                     onSubmit={form.handleSubmit(startTest)} >
-                    <Button className="w-full flex items-center rounded-full bg-secondary  dark:hover:bg-primary font-extrabold text-center text-light hover:text-primary  px-5" type="submit" size="lg">{t('generate-btn')}</Button>
+                    <Button className="w-full flex items-center" type="submit" size="lg">{t('generate-btn')}</Button>
                 </form>
             </Form>
             

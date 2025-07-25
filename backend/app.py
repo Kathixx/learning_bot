@@ -65,40 +65,19 @@ def get_chunks(documents):
     return chunks
 
 
-#  embeddings = SpacyEmbeddings(model_name="en_core_web_sm")
-
-
-# def vector_store(text_chunks):
-#     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-#     vector_store.save_local("faiss_db")
-
-
 def create_embedding_vector_db(chunks, db_name, target_directory=f"../vector_databases"):
-    """
-    this function uses the open-source embedding model HuggingFaceEmbeddings 
-    to create embeddings and store those in a vector database called FAISS, 
-    which allows for efficient similarity search
-    """
-    # instantiate embedding model
-    # todo: embeddings = SpacyEmbeddings(model_name="en_core_web_sm")
     embedding = OpenAIEmbeddings(
         model='text-embedding-3-small'
     )
-    # create the vector store 
     vectorstore = FAISS.from_documents(
         documents=chunks,
         embedding=embedding
     )
-    # save vector database locally
     if not os.path.exists(target_directory):
         os.makedirs(target_directory)
     vectorstore.save_local(f"{target_directory}/{db_name}_vector_db")
 
 def retrieve_from_vector_db(vector_db_path):
-    """
-    this function splits out a retriever object from a local vector database
-    """
-    # instantiate embedding model
     embeddings = OpenAIEmbeddings(
         model='text-embedding-3-small'
     )
@@ -111,9 +90,6 @@ def retrieve_from_vector_db(vector_db_path):
     return retriever
 
 def connect_chains(retriever):
-    """
-    this function connects stuff_documents_chain with retrieval_chain
-    """
     stuff_documents_chain = create_stuff_documents_chain(
         llm=OpenAI(),
         prompt=hub.pull("langchain-ai/retrieval-qa-chat")
@@ -127,60 +103,20 @@ def connect_chains(retriever):
 
 def readPDF(filename):
     print("reading the pdf...")
-    # text = ""
-    # documents = load_pdf_data(pdf_path = "documents/test_document.pdf")
-    # for pdf in documents:
-    #     pdf_reader = PdfReader(pdf)
-    #     for page in pdf_reader.pages:
-    #         text += page.extract_text()
     doc = load_pdf_data(pdf_path = filename)
     doc_chunks = get_chunks(doc)
     create_embedding_vector_db(chunks=doc_chunks, db_name="deepr")
-    # vector_store(text_chunks)
     print("PDF reading done.")
 
 
-# def get_conversational_chain_question(tools):
-#     load_dotenv()
-#     #os.environ["ANTHROPIC_API_KEY"]=os.getenv["ANTHROPIC_API_KEY"]
-#     #llm = ChatAnthropic(model="claude-3-sonnet-20240229", temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"),verbose=True)
-#     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-#     prompt = ChatPromptTemplate.from_messages(
-#     [
-#         (
-#             "system",
-#             """You are a teacher who wants to test the students. Generate from the provided context a question for the students. Make sure to provide all the details.""",
-#         ),
-#         ("placeholder", "{chat_history}"),
-#         ("placeholder", "{agent_scratchpad}"),
-#     ]
-# )
-#     tool=[tools]
-#     agent = create_tool_calling_agent(llm, tool, prompt)
-#     agent_executor = AgentExecutor(agent=agent, tools=tool, verbose=True)
-#     response=agent_executor.invoke()
-#     print(response)
-#     return (response['output'])
 
-# def generate_question():
-#     if not os.path.exists("faiss_db/index.faiss"):
-#         print("FAISS index not found. Please process your PDF first.")
-#         return
-#     new_db = FAISS.load_local("faiss_db", embeddings,allow_dangerous_deserialization=True)
-#     retriever=new_db.as_retriever()
-#     retrieval_chain= create_retriever_tool(retriever,"pdf_extractor","This tool is to generate questions from the pdf")
-#     question = get_conversational_chain_question(retrieval_chain)
-#     return question
 
 def generate_question():
-    # laod credentials
     load_dotenv()
-    # define LLM
     llm = ChatOpenAI(
         model_name="gpt-3.5-turbo",
         temperature=3
     )
-    # query_en = "You are a teacher who wants to test the students. Generate a question for the students from the give context {information}, which activates deep learning for them. Make sure to provide all the details."
     query_de = """ 
         Du bist Lehrkraft. Lies dir das folgende PDF-Dokument aufmerksam durch und fasse es zusammen. Generiere eine kurze, gut verständliche, tiefgründige Frage, die sich direkt auf deine Zusammenfassung bezieht. Die Frage soll nicht bloß Fakten abfragen, sondern dazu anregen, kritisch oder analytisch über das Thema nachzudenken.
         Berücksichtige dabei:
@@ -199,7 +135,6 @@ def generate_question():
 
 def getResult(question, answer):
     load_dotenv()
-    # define LLM
     llm = ChatOpenAI(
         model_name="gpt-4.1-nano",
         temperature=3
@@ -220,7 +155,6 @@ def getAnswer(question):
     print("I will get the answer")
     print(question)
     load_dotenv()
-    # define LLM
     llm = ChatOpenAI(
         model_name="gpt-4.1-nano",
         temperature=3
@@ -235,47 +169,8 @@ def getAnswer(question):
     )
     return output['answer']
 
-# def get_conversational_chain(tools,ques):
-#     load_dotenv()
-#     #os.environ["ANTHROPIC_API_KEY"]=os.getenv["ANTHROPIC_API_KEY"]
-#     #llm = ChatAnthropic(model="claude-3-sonnet-20240229", temperature=0, api_key=os.getenv("ANTHROPIC_API_KEY"),verbose=True)
-#     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
-#     prompt = ChatPromptTemplate.from_messages(
-#     [
-#         (
-#             "system",
-#             """You are a helpful assistant. Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
-#     provided context just say, "answer is not available in the context", don't provide the wrong answer""",
-#         ),
-#         ("placeholder", "{chat_history}"),
-#         ("human", "{input}"),
-#         ("placeholder", "{agent_scratchpad}"),
-#     ]
-# )
-#     tool=[tools]
-#     agent = create_tool_calling_agent(llm, tool, prompt)
-
-#     agent_executor = AgentExecutor(agent=agent, tools=tool, verbose=True)
-#     response=agent_executor.invoke({"input": ques})
-#     print(response)
-#     st.write("Reply: ", response['output'])
-
-# def user_input(user_question):
-#     if not os.path.exists("faiss_db/index.faiss"):
-#         print("FAISS index not found. Please process your PDF first.")
-#         return
-    
-#     new_db = FAISS.load_local("faiss_db", embeddings,allow_dangerous_deserialization=True)
-    
-#     retriever=new_db.as_retriever()
-#     retrieval_chain= create_retriever_tool(retriever,"pdf_extractor","This tool is to give answer to queries from the pdf")
-#     get_conversational_chain(retrieval_chain,user_question)
-
-
-
 @app.after_request
 def after_request(response):
-    # Add CORS headers for every response
     response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'  # Replace with your client domain
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     response.headers['Access-Control-Allow-Methods'] = 'GET,POST,PUT,DELETE,OPTIONS'
@@ -324,17 +219,12 @@ def get_answer():
 def upload_pdf():
     if 'pdf' not in request.files:
         return jsonify({'error': 'No file part'}), 400
-
     pdf = request.files['pdf']
     if pdf.filename == '':
         return jsonify({'error': 'No selected file'}), 400
-
     filepath = os.path.join(UPLOAD_FOLDER, pdf.filename)
     pdf.save(filepath)
-
     readPDF(filepath)
-
-    # You can now read the file and feed it into your RAG logic
     return jsonify({'message': 'File uploaded successfully', 'Filepath': filepath, 'Filename': pdf.filename})
 
 # pdf Viewer

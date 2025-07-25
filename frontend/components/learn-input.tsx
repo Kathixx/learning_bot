@@ -91,7 +91,7 @@ export function LearnInput() {
             )}
           />
         </div>
-        <Button className="self-end bg-secondary rounded-full text-light mb-5" type="submit" variant="ghost" size="icon"><IconSend2></IconSend2></Button>
+        <Button className="self-end mb-5" type="submit" size="icon"><IconSend2></IconSend2></Button>
       </form>
     </Form>
   )

@@ -2,7 +2,7 @@
 import { PDFViewer } from "@/components/pdf-viewer"
 import { LearnPDFUpload } from "@/components/learn-pdf-upload"
 import { LearnChatContainer } from "@/components/learn-chat-container"
-import { useState, createContext, useContext, useEffect } from 'react'
+import { useState, createContext, useContext, useEffect, useRef } from 'react'
 import { MessageType } from "@/types/message"
 import responses from "@/data/random_chatbot_responses.json"
 import { v4 as uuidv4 } from 'uuid';
@@ -27,11 +27,15 @@ const useLearnContext = () => useContext(LearnContext)
 
 export default function LearnBot() {
 
+  const welcomeSet = useRef(false);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [filename, setFileName] = useState("");
 
   useEffect(() => {
+    if(!welcomeSet.current){
       getWelcomeMessages();
+      welcomeSet.current = true
+    }
     }, []);
 
   async function getWelcomeMessages() {
@@ -76,7 +80,6 @@ export default function LearnBot() {
 
   return (
     <LearnContext.Provider value = {{messages, setMessages, filename, setFileName, addMessage, returnJsonMsg}}>
-
       <div className="w-full h-screen ">
         {filename === "" ? 
           (<div className="w-full h-screen flex items-center justify-center">
