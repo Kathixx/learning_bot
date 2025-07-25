@@ -109,8 +109,6 @@ def readPDF(filename):
     print("PDF reading done.")
 
 
-
-
 def generate_question():
     load_dotenv()
     llm = ChatOpenAI(
@@ -141,7 +139,7 @@ def getResult(question, answer):
     )
     query_de = f"""
     Du bist Lehrkraft. Lies dir das folgende PDF-Dokument aufmerksam durch und beantworte damit die folgende Frage {question}. Vergleiche deine generierte Antwort mit der Schüler-Antwort {answer}. 
-    Erläutere kurz, was an der Schüler-Antwort gut oder schlecht ist. Gehe dabei vor allem auf fehlende Aspekte ein oder Trugschlüsse, sodass der Schüler mit deiner Hilfe eine perfekte Antwort erstellen kann.  Erstelle ein kurzes Schüler-Feedback. Gib nur das Schüler-Feedback zurück und richte dich dabei, direkt an den Schüler selbst. Lobe und motiviere zum weiter Üben.
+    Erläutere kurz, was an der Schüler-Antwort gut oder schlecht ist. Gehe dabei vor allem auf fehlende Aspekte ein oder Trugschlüsse, sodass der Schüler mit deiner Hilfe eine perfekte Antwort erstellen kann. Erstelle ein kurzes Feedback und erkläre dich so, als würdest du direkt zum Schüler sprechen. Lobe und motiviere zum weiter Üben.
     """
     retriever = retrieve_from_vector_db("../vector_databases/deepr_vector_db")
     retrieval_chain = connect_chains(retriever)

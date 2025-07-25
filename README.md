@@ -7,7 +7,19 @@ In the **testing mode** the bot generates questions, which are suppose to encour
 
 More about Chatbots & Learning [here](https://www.clearinghouse.edu.tum.de/lehrstrategien/chatbots-im-unterricht-welche-lernergebnisse-werden-unterstuetzt/).
 
-![Testbot](/testbot_fast.mp4)
+
+
+## User Interface
+### Learnbot
+![UI of the Learnbot](/learnbot.png)
+
+### Testbot
+![UI of the Testbot](/testbot.png)
+
+## Dark mode and Multilinguarity
+![UI in darkmode and english](/darkmode_english.png)
+_(the system messages of the bot are currently only in german available)_
+
 
 # Technical Infos
 ### TechStack
@@ -23,13 +35,4 @@ More about Chatbots & Learning [here](https://www.clearinghouse.edu.tum.de/lehrs
 - pretty icons with [Tabler Icons](https://tabler.io/icons)
 - dark/light mode
 - This layout is not yet responsive, but it is optimised for a 13" display
-
-
-
-
-
-
-
-
- 
 
