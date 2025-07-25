@@ -7,7 +7,7 @@ In the **testing mode** the bot generates questions, which are suppose to encour
 
 More about Chatbots & Learning [here](https://www.clearinghouse.edu.tum.de/lehrstrategien/chatbots-im-unterricht-welche-lernergebnisse-werden-unterstuetzt/).
 
-![Testbot](/testbot_fast.gif)
+![Testbot](/testbot_fast.mp4)
 
 # Technical Infos
 ### TechStack
